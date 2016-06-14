@@ -230,11 +230,7 @@ function isPrime(n) {
  */
 function toNumber(value, def) {
     var a = new Number(value);
-    if (isNaN(a)) {
-        return def;
-    } else {
-        return a;
-    }
+    return isNaN(a) ? def : a;
 }
 
 module.exports = {
