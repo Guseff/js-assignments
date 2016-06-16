@@ -105,11 +105,10 @@ function timeSpanToString(startDate, endDate) {
  */
 function angleBetweenClockHands(date) {
     let hs = date.getUTCHours() > 12 ? date.getUTCHours() - 12 : date.getUTCHours();
-    let hourAngle = (hs > 6 ? -Math.PI*(12 - hs)/6 : Math.PI*hs/6) + Math.PI*date.getUTCMinutes()/360;
+    let hourAngle = (hs > 6 ? Math.PI*(hs - 12)/6 : Math.PI*hs/6) + Math.PI*date.getUTCMinutes()/360;
 
-    let minAngle = date.getUTCMinutes() > 30 ? -Math.PI*(60 - date.getUTCMinutes())/30 : Math.PI*date.getUTCMinutes()/30;
+    let minAngle = date.getUTCMinutes() > 30 ? Math.PI*(date.getUTCMinutes() - 60)/30 : Math.PI*date.getUTCMinutes()/30;
     return hourAngle > minAngle ? hourAngle - minAngle : minAngle - hourAngle;
-    //return minAngle;
 }
 
 
