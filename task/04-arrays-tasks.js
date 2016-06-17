@@ -217,7 +217,11 @@ function getTail(arr, n) {
  *    +'30,31,32,33,34'
  */
 function toCsvText(arr) {
-   throw new Error('Not implemented');
+   let str = new String();
+   arr.map((value) => {
+       str = str + value.toString() + '\n';
+   });
+   return str.trim();
 }
 
 /**
@@ -558,7 +562,14 @@ function getIntervalArray(start, end) {
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
 function distinct(arr) {
-   throw new Error('Not implemented');
+   let res = new Array();
+   arr.filter((value) => {
+       if (!res.includes(value)) {
+           res = res.concat(value);
+           return value;
+       };
+   });
+   return res;
 }
 
 /**
@@ -608,6 +619,13 @@ function group(array, keySelector, valueSelector) {
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
+   /* let res = new Array();
+    let gap = new String();
+    arr.map((value, index, array) => {
+        (gap) = childrenSelector();
+        res = res.concat(gap);
+    });
+    return res;*/
     throw new Error('Not implemented');
 }
 
@@ -648,7 +666,13 @@ function getElementByIndexes(arr, indexes) {
  * 
  */
 function swapHeadAndTail(arr) {
-    throw new Error('Not implemented');
+    let a = arr.length % 2;
+    let kkk = arr.splice(0, arr.length/2);
+    if (a != 0) {
+        let el = arr.shift();
+        arr.push(el);
+    };
+    return arr.concat(kkk);
 }
 
 
