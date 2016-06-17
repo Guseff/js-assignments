@@ -338,9 +338,9 @@ function get3TopItems(arr) {
  */
 function getPositivesCount(arr) {
    let num = 0;
-   arr.map(function (value) {
+   arr.map((value) => {
        if (value > 0) num++;
-   });
+    });
    return num; 
 }
  
@@ -358,24 +358,25 @@ function getPositivesCount(arr) {
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
 function sortDigitNamesByNumericOrder(arr) {
-  /*  let items = [
-    { name: 'zero', value: 0},
-    { name: 'one', value: 1 },
-    { name: 'two', value: 2 },
-    { name: 'three', value: 3 },
-    { name: 'four', value: 4 },
-    { name: 'five', value: 5},
-    { name: 'six', value: 6},
-    { name: 'seven', value: 7},
-    { name: 'eight', value: 8},
-    { name: 'nine', value: 9}
-];
-    arr.sort(function (a, b) {
-       a.value - b.value;
+    arr.sort((a, b) => {
+        function trans(str) {
+            if (str == 'zero') return 0;
+            if (str == 'one') return 1;
+            if (str == 'two') return 2;
+            if (str == 'three') return 3;
+            if (str == 'four') return 4;
+            if (str == 'five') return 5;
+            if (str == 'six') return 6;
+            if (str == 'seven') return 7;
+            if (str == 'eight') return 8;
+            if (str == 'nine') return 9;
+        }
+        a = trans(a); 
+        b = trans(b);
+        return a-b;
     });
-    return arr;*/
-    throw new Error('Not implemented');
-}
+    return arr;
+   }
 
 /** 
  * Returns the sum of all items in the specified array of numbers
@@ -433,7 +434,11 @@ function getFalsyValuesCount(arr) {
  *    [ true, 0, 1, 'true' ], true => 1
  */
 function findAllOccurences(arr, item) {
-   throw new Error('Not implemented');
+   let num = 0;
+   arr.map((value) => {
+       if (value === item) num++;
+   });
+   return num;
 }
 
 /**
@@ -448,7 +453,12 @@ function findAllOccurences(arr, item) {
  *    ['rock', 'paper', 'scissors']     => 'rock,paper,scissors'
  */
 function toStringList(arr) {
-   throw new Error('Not implemented');
+   let str = new String();
+   arr.map((value) => {
+       str = str.concat(value + ',');
+   });
+   str = str.slice(0, str.length - 1);
+   return str;
 }
 
 
@@ -477,7 +487,13 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  */
 function sortCitiesArray(arr) {
-   throw new Error('Not implemented');
+   return arr.sort(function (a,b) {
+       if (a.country > b.country) return 1;
+       if (a.country < b.country) return -1;
+       if (a.city > b.city) return 1;
+       if (a.city < b.city) return -1;
+       return 0;
+   });
 }
 
 /**
@@ -499,6 +515,12 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]   
  */
 function getIdentityMatrix(n) {
+   /*let arr = new Array(n);
+   arr.fill(new Array(n).fill(0));
+   arr.map((value, index, array) => {
+           value[index] = 1;
+   });
+   return arr;*/
    throw new Error('Not implemented');
 }
 
@@ -516,7 +538,12 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-   throw new Error('Not implemented');
+   let arr = new Array(end-start+1);
+   arr.fill(0);                             // почему без этой строки не работает?
+   arr.map((value, index, array) => {
+      array[index] = index + start;
+   });
+   return arr;
 }
 
 /**
