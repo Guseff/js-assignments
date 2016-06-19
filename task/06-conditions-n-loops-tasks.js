@@ -30,7 +30,10 @@
  *
  */
 function getFizzBuzz(num) {
-    throw new Error('Not implemented');
+    let res = '';
+    if (num%3 == 0) res = res.concat('Fizz');
+    if (num%5 == 0) res = res.concat('Buzz');
+    return (res == '') ? num : res;
 }
 
 
@@ -46,7 +49,11 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-    throw new Error('Not implemented');
+    let fff = 1;
+    for (var i = 2; i <= n; i++) {
+          fff = fff*(i);  
+    }
+    return fff;
 }
 
 
@@ -63,7 +70,11 @@ function getFactorial(n) {
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
 function getSumBetweenNumbers(n1, n2) {
-    throw new Error('Not implemented');
+    let sum = 0;
+    for (var i = n1; i <= n2; i++) {
+        sum = sum + i;
+    };
+    return sum;
 }
 
 
@@ -82,7 +93,8 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a,b,c) {
-    throw new Error('Not implemented');
+    let sum = a + b + c;
+    return (a < sum - a && b < sum - b && c < sum -c) ? true : false;
 }
 
 
@@ -119,7 +131,8 @@ function isTriangle(a,b,c) {
  *  
  */
 function doRectanglesOverlap(rect1, rect2) {
-    throw new Error('Not implemented');
+    return (rect1.top <= rect2.top && rect1.left <= rect2.left && rect1.top + rect1.height > rect2.top && rect1.left + rect1.width > rect2.left ||
+            rect2.top <= rect1.top && rect2.left <= rect1.left && rect2.top + rect2.height > rect1.top && rect2.left + rect2.width > rect1.left)? true:false;
 }
 
 
@@ -150,7 +163,7 @@ function doRectanglesOverlap(rect1, rect2) {
  *   
  */
 function isInsideCircle(circle, point) {
-    throw new Error('Not implemented');
+    return (Math.sqrt((circle.center.x - point.x)*(circle.center.x - point.x) + (circle.center.y - point.y)*(circle.center.y - point.y)) < circle.radius)? true : false;
 }
 
 
@@ -192,7 +205,8 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-    throw new Error('Not implemented');
+    //let res = new String((isStartIncluded)? '[':'(');
+    return new String((isStartIncluded)? '[':'(').concat((a>b)? b:a).concat(', ').concat((a>b)? a:b).concat((isEndIncluded)? ']':')');
 }
 
 
@@ -209,7 +223,11 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-    throw new Error('Not implemented');
+    let res = new String('');
+    for (var i=0; i<=str.length-1; i++) {
+        res = new String(str[i]).concat(res);
+    };
+    return res;
 }
 
 
@@ -226,7 +244,13 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    throw new Error('Not implemented');
+    let res = 0;
+    while (num != 0) {
+        res = res*10 + num%10;
+        num = Math.trunc(num/10);
+    }
+    return res;
+
 }
 
 
@@ -251,7 +275,20 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-    throw new Error('Not implemented');
+    let str = ccn.toString();
+    let oddsum = 0;
+    let evensum = 0;
+    let num = ccn;
+    while (num != 0) {
+        oddsum += num%10;
+        num = Math.trunc(num/100);
+    }
+    num = Math.trunc(ccn/10);
+    while (num != 0) {
+        evensum += (num%10*2 > 9)? num%10*2 - 9 : num%10*2;
+        num = Math.trunc(num/100);
+    }
+    return ((oddsum  + evensum)%10 ==0)? true : false;
 }
 
 
