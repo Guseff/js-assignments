@@ -259,14 +259,19 @@ function toArrayOfSquares(arr) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
 function getMovingSum(arr) {
-   let a = 0;
+   /* let a = 0;
    return arr.map(function (value) {
        a = a + value;
        return a;
-   });
-   /*return arr.reduce((prev, curr) => {
-      return prev.concat(prev + curr);
-   }, []);*/
+   });*/
+
+   return arr.reduce((prev, curr, index) => {
+      let item = (index === 0) ? 0 : prev[index - 1];
+      item = item + curr;
+      prev.push(item);
+
+      return prev;
+   }, []);
 }
 
 // TODO: Переделать с arrow function
@@ -679,9 +684,7 @@ function selectMany(arr, childrenSelector) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(arr, indexes) {
-    return indexes.reduce((prev, curr) => {
-       return prev[curr];
-    }, arr);
+    return indexes.reduce((prev, curr) => prev[curr], arr);
 }
 
 
