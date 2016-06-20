@@ -664,9 +664,7 @@ function group(array, keySelector, valueSelector) {
  */
 function selectMany(arr, childrenSelector) {
     let res = new Array();
-    arr.map((value) => {
-        res = res.concat( childrenSelector(value) );
-    });
+    arr.map((value) => res = res.concat( childrenSelector(value) ));
     return res;
 }
 
