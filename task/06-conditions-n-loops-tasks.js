@@ -179,7 +179,10 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-    throw new Error('Not implemented');
+    for (var i = 0; i < str.length; i++) {
+        if (str.indexOf(str.charAt(i)) === str.lastIndexOf(str.charAt(i))) return str.charAt(i);
+    }
+    return null;
 }
 
 
@@ -275,7 +278,7 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-    let str = ccn.toString();
+    /*let str = ccn.toString();
     let oddsum = 0;
     let evensum = 0;
     let num = ccn;
@@ -288,7 +291,8 @@ function isCreditCardNumber(ccn) {
         evensum += (num%10*2 > 9)? num%10*2 - 9 : num%10*2;
         num = Math.trunc(num/100);
     }
-    return ((oddsum  + evensum)%10 ==0)? true : false;
+    return ((oddsum  + evensum)%10 ==0)? true : false;*/
+    throw new Error('Not implemented');
 }
 
 
@@ -307,7 +311,15 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
+    while (num > 9) {
+        let res = 0;        
+        while (num != 0) {
+            res += num%10;
+            num = Math.trunc(num/10);
+        }
+        num = res;
+    }
+    return num;
 }
 
 
@@ -333,7 +345,19 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
-    throw new Error('Not implemented');
+    let index = 0;
+    while(index != -1) {
+        index = str.indexOf('[]');
+        if (index === -1) index = str.indexOf('{}');
+        if (index === -1) index = str.indexOf('()');
+        if (index === -1) index = str.indexOf('<>');
+        if (index != -1) {
+        let str1 = str.slice(0, index);
+        let str2 = str.slice(index+2);
+        str = str1.concat(str2);
+        }
+    };
+    return (str == '')? true : false;
 }
 
 
@@ -369,7 +393,32 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-    throw new Error('Not implemented');
+    let gap = (endDate - startDate)/1000;
+    if (gap <= 45) {
+        return 'a few seconds ago';
+    } else if (gap <= 90) {
+        return 'a minute ago';
+    } else if (gap <= 45*60) {
+        return ((gap%60 > 30)? Math.trunc(gap/60) + 1 : Math.trunc(gap/60)) + ' minutes ago';
+    } else if (gap <= 60*90) {
+        return 'an hour ago';
+    } else if (gap <= 60*60*22) {
+        return ((gap/60%60 > 30)? Math.trunc(gap/60/60) + 1 : Math.trunc(gap/60/60)) + ' hours ago';
+    } else if (gap <= 60*60*36) {
+        return 'a day ago';
+    } else if (gap <= 60*60*24*25) {
+        return ((gap/24/60%60 > 30)? Math.trunc(gap/60/60/24) + 1 : Math.trunc(gap/60/60/24)) + ' days ago';
+    } else if (gap <= 60*60*24*45) {
+        return 'a month ago';
+    } else if (gap <= 60*60*24*345) {
+        let days = gap/60/60/24;
+        return ((days%30 > 15)? Math.trunc(days/30) + 1 : Math.trunc(days/30)) + ' months ago';
+    } else if (gap <= 60*60*24*545) {
+        return 'a year ago';
+    } else {
+        let days = gap/60/60/24;
+        return ((days%365 > 183)? Math.trunc(days/365) + 1 : Math.trunc(days/365)) + ' years ago';
+    }
 }
 
 
@@ -393,7 +442,12 @@ function timespanToHumanString(startDate, endDate) {
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-    throw new Error('Not implemented');
+    let str = '';
+    while (num !=0) {
+        str = (num%n).toString().concat(str);
+        num = Math.trunc(num/n);
+    }
+    return str;
 }
 
 
@@ -467,8 +521,30 @@ function getMatrixProduct(m1, m2) {
  *    [    ,   ,    ]]
  *
  */
+
+
 function evaluateTicTacToePosition(position) {
-    throw new Error('Not implemented');
+    let str = position[0][0];
+    if ((str != undefined) && 
+        (position[0][1] === str && position[0][2] === str || position[1][1] === str && position[2][2] === str || position[1][0] === str && position[2][0] === str)) {                       
+            return str;      
+    } 
+    str = position[0][2];
+    if ((str != undefined) &&
+        (position[1][1] === str && position[2][0] === str || position[1][2] === str && position[2][2] === str)) {
+            return str;
+    } 
+    str = position[1][1];
+    if ((str != undefined) &&
+        (position[0][1] === str && position[2][1] === str || position[1][0] === str && position[1][2] === str)) {
+            return str;
+    } 
+    str = position[2][0];
+    if ((str != undefined) &&
+        (position[2][1] === str && position[2][2] === str)) {
+            return str;
+    }
+    return undefined;
 }
 
 
