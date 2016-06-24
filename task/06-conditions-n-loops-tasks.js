@@ -275,24 +275,18 @@ function reverseInteger(num) {
  *
  *   4571234567890111 => false
  *   5436468789016589 => false
- *   4916123456789012 => false
+ *   4916123456789012 => false  
  */
 function isCreditCardNumber(ccn) {
-    /*let str = ccn.toString();
-    let oddsum = 0;
-    let evensum = 0;
-    let num = ccn;
-    while (num != 0) {
-        oddsum += num%10;
-        num = Math.trunc(num/100);
+    let even = false;
+    let sum = 0;
+    let str = ccn.toString();
+    for (let i = str.length - 1; i >= 0; i--) {
+        let gap = eval(str[i]);
+        sum += (even)? (gap*2 > 9 ? gap*2 - 9 : gap*2) : gap;
+        even = !even;
     }
-    num = Math.trunc(ccn/10);
-    while (num != 0) {
-        evensum += (num%10*2 > 9)? num%10*2 - 9 : num%10*2;
-        num = Math.trunc(num/100);
-    }
-    return ((oddsum  + evensum)%10 ==0)? true : false;*/
-    throw new Error('Not implemented');
+    return (sum%10 === 0) ? true : false;
 }
 
 
