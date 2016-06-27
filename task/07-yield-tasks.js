@@ -33,7 +33,18 @@
  *
  */
 function* get99BottlesOfBeer() {
-    throw new Error('Not implemented');
+   for (let i = 99; i > 2; i--) {
+       yield `${i} bottles of beer on the wall, ${i} bottles of beer.`;
+       yield `Take one down and pass it around, ${i - 1} bottles of beer on the wall.`;
+   }
+   yield '2 bottles of beer on the wall, 2 bottles of beer.';
+   yield `Take one down and pass it around, 1 bottle of beer on the wall.`;
+
+   yield '1 bottle of beer on the wall, 1 bottle of beer.';
+   yield 'Take one down and pass it around, no more bottles of beer on the wall.';
+
+   yield 'No more bottles of beer on the wall, no more bottles of beer.';
+   yield 'Go to the store and buy some more, 99 bottles of beer on the wall.';
 }
 
 
@@ -47,7 +58,18 @@ function* get99BottlesOfBeer() {
  *
  */
 function* getFibonacciSequence() {
-    throw new Error('Not implemented');
+    var fn1 = 1;
+    var fn2 = 0;
+    while (true){  
+        var current = fn2;
+        fn2 = fn1;
+        fn1 = fn1 + current;
+        var reset = yield current;
+        if (reset){
+            fn1 = 1;
+            fn2 = 1;
+        }
+    }
 }
 
 
@@ -82,7 +104,28 @@ function* getFibonacciSequence() {
  *
  */
 function* depthTraversalTree(root) {
-    throw new Error('Not implemented');
+    Object.defineProperty(root, 'done', {
+        value: false,
+        writable: true
+    });
+
+    function move(now) {
+       if (now.children.length > 0) {
+           now.done = true;
+           console.log(now.children.length);
+           let next;
+           for (let i = 0; i < now.children.length; i++) {
+               next = now.children[i];
+               console.log('Node'+next.n);
+               move(next);
+            }
+        }
+        console.log(now.n);
+    }
+    
+    //throw new Error('Not implemented');  
+     
+    move(root);
 }
 
 
