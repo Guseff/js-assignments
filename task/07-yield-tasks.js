@@ -110,21 +110,19 @@ function* depthTraversalTree(root) {
     });
 
     function move(now) {
-       if (now.children.length > 0) {
-           now.done = true;
-           console.log(now.children.length);
-           let next;
-           for (let i = 0; i < now.children.length; i++) {
-               next = now.children[i];
-               console.log('Node'+next.n);
-               move(next);
+        console.log('Node'+now.n);
+        //yield now;
+        if (now.children != undefined) {
+            if (now.children.length > 0) {
+            now.done = true;
+            let next;
+            for (let i = 0; i < now.children.length; i++) {
+                next = now.children[i];
+                move(next);
+                }
             }
         }
-        console.log(now.n);
     }
-    
-    //throw new Error('Not implemented');  
-     
     move(root);
 }
 
