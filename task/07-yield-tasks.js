@@ -158,6 +158,7 @@ function* breadthTraversalTree(root) {
             }) 
         }
     }
+    //throw new Error('Not implemented');
 }
 
 
@@ -175,7 +176,25 @@ function* breadthTraversalTree(root) {
  *   [ 1, 3, 5, ... ], [ -1 ] => [ -1, 1, 3, 5, ...]
  */
 function* mergeSortedSequences(source1, source2) {
-    throw new Error('Not implemented');
+    let a = source1();
+    let b = source2();
+    let a_val = a.next();
+    let b_val = b.next();
+    while (true) {
+        if (a_val.value == undefined) {
+            yield b_val.value;
+            b_val = b.next()
+        } else if (b_val.value == undefined) {
+            yield a_val.value;
+            a_val = a.next()
+        } else if (a_val.value < b_val.value) {
+            yield a_val.value;
+            a_val = a.next()
+        } else {
+            yield b_val.value;
+            b_val = b.next()
+        }
+    }
 }
 
 
